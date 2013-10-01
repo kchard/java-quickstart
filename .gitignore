@@ -1,0 +1,4 @@
+.gitattributes
+
+## Gradle working directory
+.gradle/
