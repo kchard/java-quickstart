@@ -78,7 +78,7 @@ cd java-quickstart
 <pre><code>gradle setupBuild --type java-library
 </code></pre>
 
-<p>This command tells Gradle to create the files neccesary for a Java library project, or more simply, a project that creates a jar artifact. If you would like to explore the 'setupBuild' task in more detail check out the documentation here:</p>
+<p>This command tells Gradle to create the files neccesary for a Java library project. A Java library project is used to create a jar artifact. If you would like to explore the 'setupBuild' task in more detail check out the documentation here:</p>
 
 <p><a href="http://www.gradle.org/docs/1.8/userguide/build_setup_plugin.html">http://www.gradle.org/docs/1.8/userguide/build_setup_plugin.html</a></p>
 
@@ -190,7 +190,7 @@ The src directory is where you will create all of your Java source files. The di
 <h4>
 <a name="gradle-wrapper-files" class="anchor" href="#gradle-wrapper-files"><span class="octicon octicon-link"></span></a>Gradle Wrapper Files</h4>
 
-<p>The Gradle wrapper provides a way to create a self contained project. This means that you do not have to install Gradle in order to work on a project that contains the wrapper. This is great for a team of developers working on the same project or for working on a project from different computers. Another great use case is for Continuous Integration servers. No setup needs to be done on the server. All you need to do is grab the project from your SCM and execute gradle commands using the wrapper scripts.</p>
+<p>The Gradle wrapper provides a way to create a self contained project. This means that you do not have to install Gradle in order to work on a project that contains the wrapper. This is great for a team of developers working on the same project or for working on a project from different computers. Another great use case is for CI servers because no setup needs to be done on the server. All you need to do is grab the project from your SCM and execute gradle commands using the wrapper scripts.</p>
 
 <p>The files that are related to the Gradle wrapper are:</p>
 
@@ -203,7 +203,7 @@ The src directory is where you will create all of your Java source files. The di
 <pre><code>gradlew build
 </code></pre>
 
-<p>If this is the first command that you have executed using the wrapper script, then the first thing that the script will do is automatically download and configure Gradle for use in your project. The next thing that will happen is Gradle will download the dependencies declared in your build.gradle file. These dependencies will only be downloaded once and then cached on your local computer. Finally, Gradle willl compile your source and test files, execute the tests, and build a jar containing your application code.</p>
+<p>The first thing that the script will do is automatically download and configure Gradle for use in your project. The next thing that will happen is Gradle will download the dependencies declared in your build.gradle file. These dependencies will only be downloaded once and then cached on your local drive. Finally, Gradle willl compile your source and test files, execute the tests, and build a jar containing your application code.</p>
 
 <p>You can check out the documentation of the wrapper here:</p>
 
@@ -212,7 +212,7 @@ The src directory is where you will create all of your Java source files. The di
 <h3>
 <a name="5-basic-gradle-usage" class="anchor" href="#5-basic-gradle-usage"><span class="octicon octicon-link"></span></a>5. Basic Gradle Usage</h3>
 
-<p>Gradle embraces the idea of using convention over configuration for you build process. This approach was first taken by Maven in the Java build ecosystem. In practice it turns out that convention will get you most of the way there, but you will most likely require some customization to your build process. Gradle combines the conventions of Maven along with the flexibility of Ant to give you the best of both worlds. In this tutorial, I will not go into the details of the build lifecycle. For a simple project you can get along pretty far using just the built in tasks. To get started you only need to know a couple of tasks. </p>
+<p>Gradle embraces the idea of using convention over configuration for you build process. This approach was first taken by Maven in the Java build ecosystem. In practice it turns out that convention will get you most of the way there, but you will most likely require some customization to your build process. Gradle combines the conventions of Maven along with the flexibility of Ant to give you the best of both worlds. In this tutorial, I will not go into the details of the build lifecycle. For a simple project you can get pretty far using just the built in tasks. To get started you only need to know a couple of tasks. </p>
 
 <ol>
 <li><code>gradlew clean</code></li>
@@ -237,23 +237,25 @@ The src directory is where you will create all of your Java source files. The di
 <pre><code>gradlew test
 </code></pre>
 
-<p>This command instructs Gradle to compile your Java source files, execute your unit tests, and generate the test report in the 'build/report' If all of your tests passed you should see a 'BUILD SUCCESSFULL' message. </p>
+<p>This command instructs Gradle to compile your Java source files, execute your unit tests, and generate the test report. If all of your tests passed you should see a 'BUILD SUCCESSFULL' message. </p>
 
 <p>Finally, run the build command again:</p>
 
 <pre><code>gradlew build
 </code></pre>
 
-<p>This command will instruct Gradle to compile your Java source files, execute your unit tests, generate a test report, and finally assemble your jar. You may notice that the some of the steps in the build output are labelled as 'UP-TO-DATE'. Gradle is smart enough to keep track of what steps it has already executed and only execute them again if something has changed. </p>
+<p>This command will instruct Gradle to compile your Java source files, execute your unit tests, generate a test report, and assemble your jar. You may notice that the some of the steps in the build output are labelled 'UP-TO-DATE'. Gradle is smart enough to keep track of what steps it has already executed and only execute them again if something has changed. </p>
 
 <p>Now try to execute this command:</p>
 
 <pre><code>gradlew clean build
 </code></pre>
 
-<p>The end result of running this command as when you previously ran just the <code>gradlew build</code> command. However, notice that most of the build steps in the console's output no longer are marked as 'UP-TO-DATE'. This is because you told Gradle to clean up the build directory before running the build. This means that Gradle had to recompile the sources, rerun the tests, regenerate the test report and finally generate the jar.</p>
+<p>The result of running this command is the same as when you just the <code>gradlew build</code> command. However, notice that most of the build steps in the console's output no longer are marked as 'UP-TO-DATE'. This is because you told Gradle to clean up the build directory before running the build. This means that Gradle had to recompile the sources, rerun the tests, regenerate the test report and finally generate the jar.</p>
 
 <p><strong>A Basic Workflow</strong></p>
+
+<p>To start developing your library, you can follow the simple workflow described below. </p>
 
 <ol>
 <li>Develop a new feature with unit tests</li>
@@ -277,6 +279,15 @@ The src directory is where you will create all of your Java source files. The di
 <a name="start-your-project" class="anchor" href="#start-your-project"><span class="octicon octicon-link"></span></a>Start Your Project!!!</h3>
 
 <p>With what you have learned in this tutorial, you should know everything you need to get started building Java libraries with Gradle. </p>
+
+<h3>
+<a name="contact-me" class="anchor" href="#contact-me"><span class="octicon octicon-link"></span></a>Contact Me</h3>
+
+<p>If you have any questions or would like further clarification, please feel free to shoot me an email. I would be glad to help. </p>
+
+<p>Kevin</p>
+
+<p><a href="mailto:krchard@gmail.com">krchard@gmail.com</a></p>
       </section>
     </div>
 
