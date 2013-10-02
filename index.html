@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="java-quickstart : Getting started with Java and Gradle" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>java-quickstart</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/kchard/java-quickstart">View on GitHub</a>
+
+          <h1 id="project_title">java-quickstart</h1>
+          <h2 id="project_tagline">Getting started with Java and Gradle</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/kchard/java-quickstart/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/kchard/java-quickstart/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="abstract" class="anchor" href="#abstract"><span class="octicon octicon-link"></span></a>Abstract</h3>
+
+<p>The purpose of this tutorial is to get you up and running with Java and Gradle as quickly as possible. This tutorial will focus on creating a standard Java library project. Gradle is a robust tool with a huge feature set. Therefore, my goal is to provide you with as much detail as necessary to get started without overwhelming you will a flood of information. I will provide links to the relevant Gradle documentation that you should read when you are ready to dig deeper.</p>
+
+<h3>
+<a name="what-you-will-learn" class="anchor" href="#what-you-will-learn"><span class="octicon octicon-link"></span></a>What You Will Learn</h3>
+
+<ol>
+<li>How to install gradle</li>
+<li>How to generate a project skeleton with gradle</li>
+<li>Basic Gradle project structure</li>
+<li>Using the Gradle wrapper</li>
+<li>Basic Gradle usage</li>
+</ol><h3>
+<a name="1-installing-gradle" class="anchor" href="#1-installing-gradle"><span class="octicon octicon-link"></span></a>1. Installing Gradle</h3>
+
+<p>This tutorial will use Gradle 1.8 which was released 09-24-2013. Please follow the installation instructions provided by the Gradle team to get started.</p>
+
+<p><a href="http://www.gradle.org/docs/1.8/userguide/installation.html">http://www.gradle.org/docs/1.8/userguide/installation.html</a></p>
+
+<p>To verify that your installation was successful, open a terminal and run the following command:</p>
+
+<pre><code>gradle --version
+</code></pre>
+
+<p>If your installation was successful, you should see output that includes the version of Gradle (1.8) along with the versions of Gradle's various dependencies such as Groovy, Ant, Ivy, and Java.</p>
+
+<h3>
+<a name="2-generate-a-project-skeleton" class="anchor" href="#2-generate-a-project-skeleton"><span class="octicon octicon-link"></span></a>2. Generate a Project Skeleton</h3>
+
+<p>Now that you have gradle installed, navigate to the location where you would like to create your project, create a new empty directory called 'java-quickstart', and cd into it.  </p>
+
+<pre><code>mkdir java-quickstart
+cd java-quickstart
+</code></pre>
+
+<p>Before we create the project skeleton, let's take a minute to learn a really useful gradle feature. Execute the following command in your terminal:</p>
+
+<pre><code>gradle tasks
+</code></pre>
+
+<p>You should see a list of the tasks available to you. The list of available tasks will be dependent on your project setup, so it is a good idea to use this command to provide guidance as your project grows. Because we do not have a project created yet, you only see entries related to 'Build Setup' and 'Help'. Notice that there is a 'setupBuild' task available. This is the task that will provide the scaffolding for our project. To create your project execute the following command:</p>
+
+<pre><code>gradle setupBuild --type java-library
+</code></pre>
+
+<p>This command tells Gradle to create the files neccesary for a Java library project, or more simply, a project that creates a jar artifact. If you would like to explore the 'setupBuild' task in more detail check out the documentation here:</p>
+
+<p><a href="http://www.gradle.org/docs/1.8/userguide/build_setup_plugin.html">http://www.gradle.org/docs/1.8/userguide/build_setup_plugin.html</a></p>
+
+<h3>
+<a name="3-basic-gradle-project-structure" class="anchor" href="#3-basic-gradle-project-structure"><span class="octicon octicon-link"></span></a>3. Basic Gradle Project Structure</h3>
+
+<p>Take a look at the files that Gradle created for you. You should see a directory structure that looks like this:</p>
+
+<pre><code>java-quickstart/
+    build.gradle
+    settings.gradle
+    src/
+    gradle/
+    gradlew
+    gradlew.bat
+</code></pre>
+
+<p>The files can be broken down into two categories. They are the standard build files, and files related to the gradle wrapper.</p>
+
+<h4>
+<a name="build-files" class="anchor" href="#build-files"><span class="octicon octicon-link"></span></a>Build Files</h4>
+
+<p>The files that are part of the standard Gradle project structure are:</p>
+
+<ul>
+<li>build.gradle</li>
+<li>settings.gradle</li>
+<li>src/</li>
+</ul><p><strong>build.gradle</strong></p>
+
+<pre><code>/*
+ * This build file was auto generated by running the Gradle 'buildSetup' task
+ * by 'chardk' at '10/1/13 10:02 AM' with Gradle 1.8
+ *
+ * This generated file contains a sample Java project to get you started.
+ * For more details take a look at the Java Quickstart chapter in the Gradle
+ * user guide available at http://gradle.org/docs/1.8/userguide/tutorial_java_projects.html
+ */
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use 'maven central' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    mavenCentral()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    // The production code uses the SLF4J logging API at compile time
+    compile 'org.slf4j:slf4j-api:1.7.5'
+
+    // Declare the dependency for your favourite test framework you want to use in your tests.
+    // TestNG is also supported by the Gradle Test task. Just change the
+    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+    // 'test.useTestNG()' to your build script.
+    testCompile "junit:junit:4.11"
+}
+
+</code></pre>
+
+<p>This is the project build file. It is where you apply plugins, define repositories, declare dependencies, create tasks, etc. Rather than worry about the details now, just know that the file that was generated for you is all that is neccessary for a simple Java library project. As you become more familiar with Gradle and require additional functionality not offered by this simple build file, take time to read the Gradle documentation. Here are some good places to start:</p>
+
+<ul>
+<li><a href="http://www.gradle.org/docs/1.8/userguide/tutorial_java_projects.html">Java Quickstart</a></li>
+<li><a href="http://www.gradle.org/docs/1.8/userguide/java_plugin.html">Java Plugin</a></li>
+</ul><p><strong>settings.gradle</strong></p>
+
+<pre><code>/*
+ * This settings file was auto generated by the Gradle buildSetup task
+ * by 'chardk' at '10/1/13 10:02 AM' with Gradle 1.8
+ *
+ * The settings file is used to specify which projects to include in your build.
+ * In a single project build this file can be empty or even removed.
+ *
+ * Detailed information about configuring a multi-project build in Gradle can be found
+ * in the user guide at http://gradle.org/docs/1.8/userguide/multi_project_builds.html
+ */
+
+/*
+// To declare projects as part of a multi-project build use the 'include' method
+include 'shared'
+include 'api'
+include 'services:webservice'
+*/
+
+rootProject.name = 'java-quickstart'
+</code></pre>
+
+<p>This file is used to configure various project settings. In the generated file, the only setting that is being applied is assigning a value to rootProject.name. This property will be available in the build.gradle file to be used by the build tasks. As you can see from the comments, another common use of the settings.gradle file is to configure multi-project builds. Multi-project builds are outside the scope of this tutorial, but keep in mind the fact that they are a really nice way to group together related code while maintaining loose coupling. As your project grows, consider refactoring it into several simpler releated projects.  </p>
+
+<p><strong>Java Source Files</strong>
+The src directory is where you will create all of your Java source files. The directory layout looks like this:</p>
+
+<pre><code>src/
+    main/
+        java/
+    test/
+        java/
+</code></pre>
+
+<p>You will notice that the 'setupBuild' task created an example source file called 'Library.java' in the main/java directory and an example unit test file called 'LibraryTest.java' in the test/java directory. You should follow these conventions so that Gradle will automatically know where to find your Java files.</p>
+
+<h3>
+<a name="4-using-the-gradle-wrapper" class="anchor" href="#4-using-the-gradle-wrapper"><span class="octicon octicon-link"></span></a>4. Using the Gradle Wrapper</h3>
+
+<h4>
+<a name="gradle-wrapper-files" class="anchor" href="#gradle-wrapper-files"><span class="octicon octicon-link"></span></a>Gradle Wrapper Files</h4>
+
+<p>The Gradle wrapper provides a way to create a self contained project. This means that you do not have to install Gradle in order to work on a project that contains the wrapper. This is great for a team of developers working on the same project or for working on a project from different computers. Another great use case is for Continuous Integration servers. No setup needs to be done on the server. All you need to do is grab the project from your SCM and execute gradle commands using the wrapper scripts.</p>
+
+<p>The files that are related to the Gradle wrapper are:</p>
+
+<ul>
+<li>gradle/</li>
+<li>gradlew</li>
+<li>gradlew.bat</li>
+</ul><p>Assume that someone on your team created the project skeleton and checked everything in to source control. For you to start developing on the project, all you need to do is check out the source and start executing commands using the wrapper scripts. There is no need to manually install Gradle on your system. If you are developing on a Unix like system then you will use the <em>gradlew</em> script. Similarly, if you are developing on Windows you will use the <em>gradlew.bat</em> script. The gradle directory contains utilities used by the wrapper and can be ignored for the most part. Let's try running gradle with the wrapper by executing the following command:</p>
+
+<pre><code>gradlew build
+</code></pre>
+
+<p>If this is the first command that you have executed using the wrapper script, then the first thing that the script will do is automatically download and configure Gradle for use in your project. The next thing that will happen is Gradle will download the dependencies declared in your build.gradle file. These dependencies will only be downloaded once and then cached on your local computer. Finally, Gradle willl compile your source and test files, execute the tests, and build a jar containing your application code.</p>
+
+<p>You can check out the documentation of the wrapper here:</p>
+
+<p><a href="http://www.gradle.org/docs/1.8/userguide/gradle_wrapper.html">http://www.gradle.org/docs/1.8/userguide/gradle_wrapper.html</a></p>
+
+<h3>
+<a name="5-basic-gradle-usage" class="anchor" href="#5-basic-gradle-usage"><span class="octicon octicon-link"></span></a>5. Basic Gradle Usage</h3>
+
+<p>Gradle embraces the idea of using convention over configuration for you build process. This approach was first taken by Maven in the Java build ecosystem. In practice it turns out that convention will get you most of the way there, but you will most likely require some customization to your build process. Gradle combines the conventions of Maven along with the flexibility of Ant to give you the best of both worlds. In this tutorial, I will not go into the details of the build lifecycle. For a simple project you can get along pretty far using just the built in tasks. To get started you only need to know a couple of tasks. </p>
+
+<ol>
+<li><code>gradlew clean</code></li>
+<li><code>gradlew test</code></li>
+<li><code>gradlew build</code></li>
+</ol><p>You may have noticed that after you ran <code>gradlew build</code>, a new directory was created in your project's root directory named 'build'. This directory contains all of the artifacts resulting from building your project. </p>
+
+<ul>
+<li>build/classes - The compiled Java classes</li>
+<li>build/test-results - The raw results of your unit tests</li>
+<li>build/reports - An html report displaying the results of your unit tests</li>
+<li>build/libs - The java-quickstart.jar library for your project</li>
+</ul><p>In order to clean up the files generated by the build process run the following command:</p>
+
+<pre><code>gradlew clean
+</code></pre>
+
+<p>This should result in the 'build' directory being deleted. At this point your project is back to its initial state.</p>
+
+<p>Next try running this command:</p>
+
+<pre><code>gradlew test
+</code></pre>
+
+<p>This command instructs Gradle to compile your Java source files, execute your unit tests, and generate the test report in the 'build/report' If all of your tests passed you should see a 'BUILD SUCCESSFULL' message. </p>
+
+<p>Finally, run the build command again:</p>
+
+<pre><code>gradlew build
+</code></pre>
+
+<p>This command will instruct Gradle to compile your Java source files, execute your unit tests, generate a test report, and finally assemble your jar. You may notice that the some of the steps in the build output are labelled as 'UP-TO-DATE'. Gradle is smart enough to keep track of what steps it has already executed and only execute them again if something has changed. </p>
+
+<p>Now try to execute this command:</p>
+
+<pre><code>gradlew clean build
+</code></pre>
+
+<p>The end result of running this command as when you previously ran just the <code>gradlew build</code> command. However, notice that most of the build steps in the console's output no longer are marked as 'UP-TO-DATE'. This is because you told Gradle to clean up the build directory before running the build. This means that Gradle had to recompile the sources, rerun the tests, regenerate the test report and finally generate the jar.</p>
+
+<p><strong>A Basic Workflow</strong></p>
+
+<ol>
+<li>Develop a new feature with unit tests</li>
+<li><code>gradlew test</code></li>
+<li>If tests fail, fix the code and go back to step 2</li>
+<li>If you need to add more features, go back to step 1</li>
+<li><code>gradlew clean build</code></li>
+</ol><p>At the end of this workflow you should have a unit tested version of 'java-quickstart.jar' that is ready for use.</p>
+
+<p>Using this simple workflow with the default Gradle tasks can actually get you quite a long ways in the development of you project. At some point however, you will most likely need to define your own custom tasks and add additional external dependencies. When you get to that point, check out the following documentation:</p>
+
+<ul>
+<li><a href="http://www.gradle.org/docs/1.8/userguide/tutorial_using_tasks.html">Build Script Basics</a></li>
+<li><a href="http://www.gradle.org/docs/1.8/userguide/artifact_dependencies_tutorial.html">Dependencey Management Basics</a></li>
+<li><a href="http://www.gradle.org/docs/1.8/userguide/writing_build_scripts.html">Writing Build Scripts</a></li>
+</ul><p>The Gradle team has done a really nice job of documenting the tool. All of the references that I have included, plus a ton more are available here:</p>
+
+<p><a href="http://www.gradle.org/docs/1.8/userguide/userguide.html">Gradle 1.8 User Guide</a></p>
+
+<h3>
+<a name="start-your-project" class="anchor" href="#start-your-project"><span class="octicon octicon-link"></span></a>Start Your Project!!!</h3>
+
+<p>With what you have learned in this tutorial, you should know everything you need to get started building Java libraries with Gradle. </p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">java-quickstart maintained by <a href="https://github.com/kchard">kchard</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
